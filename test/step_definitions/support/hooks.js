@@ -7,7 +7,7 @@ var myHooks = function() {
 
     this.Before(function(callback) {
 
-        // Truncate assets
+        // Truncate tables
         knex.raw('truncate table accounts cascade')
             .then(function() {
                 return knex.raw('truncate table categories cascade');

@@ -10,18 +10,13 @@ module.exports = {
 
 var knex = require('./db').knex;
 var joinjs = require('join-js');
-var errors = require('./../../infrastructure/errors');
 var resultMaps = require('./resultmaps');
-var domain = require('../../domain');
-var Category = domain.Category;
+var Category = require('../../domain').Category;
 
 /**
  * Creates a new category and inserts it in to the database.
- * @param {Object} categoryData - Full category data, excluding the id. For example:
- * {
- *     name: 'Shopping'
- * }
- * @return {Promise} A promise that returns a full copy of the inserted category (including the id) on fulfillment.
+ * @param {Object} categoryData minus the id
+ * @return {Promise} A promise that returns the inserted category (including the id)
  */
 function createCategory(categoryData) {
 
@@ -38,12 +33,8 @@ function createCategory(categoryData) {
 
 /**
  * Updates an existing category.
- * @param {Object} categoryData - Full category data, including the id. For example:
- * {
- *     id: 1,
- *     name: 'Shopping'
- * }
- * @return {Promise} A promise that returns a full copy of the inserted category (including the id) on fulfillment.
+ * @param {Object} categoryData including the id
+ * @return {Promise} A promise that returns the updated category (including the id)
  */
 function updateCategory(categoryData) {
 
@@ -70,9 +61,6 @@ function getCategory(id) {
 
         .then(function(resultSet) {
             return joinjs.mapOne(resultSet, resultMaps, 'categoryMap');
-        })
-        .catch(joinjs.NotFoundError, function(e) {
-            throw new errors.NotFoundError(e.message);
         });
 }
 

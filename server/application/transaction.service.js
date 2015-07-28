@@ -10,47 +10,30 @@ module.exports = {
 };
 
 var persistence = require('./persistence');
-var TransactionRepository = persistence.transactionRepository;
+var transactionRepository = persistence.transactionRepository;
 
 /**
  * Creates a new transaction and inserts it in to the database.
- * @param {Object} transactionData - Full transaction data, excluding the id. For example:
- * {
- *     txn_date: new Date('2015-02-01T00:00Z'),
- *     payee: 'Chevron Gas Station',
- *     memo: 'Gas',
- *     amount: -30.00,
- *     account_id: 3,
- *     category_id: 1
- * }
- * @return {Promise} A promise that returns a full copy of the inserted transaction (including the id) on fulfillment.
+ * @param {Object} transactionData minus the id
+ * @return {Promise} A promise that returns the inserted transaction (including the id)
  */
 function createTransaction(transactionData) {
-    return TransactionRepository.createTransaction(transactionData);
+    return transactionRepository.createTransaction(transactionData);
 }
 
 /**
  * Updates an existing transaction.
- * @param {Object} transactionData - Full transaction data, including the id. For example:
- * {
- *     id: 1,
- *     txn_date: new Date('2015-02-01T00:00Z'),
- *     payee: 'Chevron Gas Station',
- *     memo: 'Gas',
- *     amount: -30.00,
- *     account_id: 3,
- *     category_id: 1
- * }
- * @return {Promise} A promise that returns a full copy of the updated transaction on fulfillment.
+ * @param {Object} transactionData including the id
+ * @return {Promise} A promise that returns the updated transaction (including the id)
  */
 function updateTransaction(transactionData) {
-    return TransactionRepository.updateTransaction(transactionData);
+    return transactionRepository.updateTransaction(transactionData);
 }
 
 /**
  * Gets an existing transaction along with its account and category.
  * @param {integer} id
- * @return {Promise} A promise that returns the desired transaction on fulfillment. For example:
+ * @return {Promise} A promise that returns the desired transaction. For example:
  *  {
  *     id: 1,
  *     txn_date: '2013-01-01T00:00:00.000Z',
@@ -68,17 +51,17 @@ function updateTransaction(transactionData) {
  * }
  */
 function getTransaction(id) {
-    return TransactionRepository.getTransaction(id);
+    return transactionRepository.getTransaction(id);
 }
 
 /**
  * Gets all transactions.
  * @param {number} [accountId] returns transactions only for the specified account
- * @return {Promise} A promise that returns an array of all transactions on fulfillment.
+ * @return {Promise} A promise that returns an array of all transactions.
  * Format is the same as getTransaction(), but now as an array of transactions.
  */
 function getTransactions(accountId) {
-    return TransactionRepository.getTransactions(accountId);
+    return transactionRepository.getTransactions(accountId);
 }
 
 /**
@@ -96,7 +79,7 @@ function getTransactions(accountId) {
  * ]
  */
 function getTransactionsByCategory(startDate, endDate) {
-    return TransactionRepository.getTransactionsByCategory(startDate, endDate);
+    return transactionRepository.getTransactionsByCategory(startDate, endDate);
 }
 
 /**
@@ -105,5 +88,5 @@ function getTransactionsByCategory(startDate, endDate) {
  * @return {Promise} A promise that gets fulfilled when the transaction is deleted.
  */
 function deleteTransaction(id) {
-    return TransactionRepository.deleteTransaction(id);
+    return transactionRepository.deleteTransaction(id);
 }

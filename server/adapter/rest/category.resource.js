@@ -10,21 +10,21 @@ module.exports = {
 function addRoutes(api) {
     api.post('/categories', createCategory);
     api.put('/categories/:id', updateCategory);
-    api.get('/categories', getCategories);
     api.get('/categories/:id', getCategory);
+    api.get('/categories', getCategories);
     api.delete('/categories/:id', deleteCategory);
 }
-
 
 var infrastructure = require('../../infrastructure');
 var log = infrastructure.logger;
 var errors = infrastructure.errors;
 
-var application = require('../../application');
-var categoryService = application.categoryService;
+var categoryService = require('../../application').categoryService;
 
 /**
- * Creates a new category.
+ * Creates a new category and inserts it in to the database.
+ * @param {Object} req - req.body contains categoryData minus the id
+ * @param {Object} res - res.body contains the inserted category (including the id)
  */
 function createCategory(req, res) {
 
@@ -42,6 +42,8 @@ function createCategory(req, res) {
 
 /**
  * Updates an existing category.
+ * @param {Object} req - req.body contains categoryData including the id
+ * @param {Object} res - res.body contains the updated category (including the id)
  */
 function updateCategory(req, res) {
 
@@ -59,6 +61,8 @@ function updateCategory(req, res) {
 
 /**
  * Gets an existing category.
+ * @param {Object} req - req.params.id contains id of the category to get
+ * @param {Object} res - res.body contains the requested category
  */
 function getCategory(req, res) {
 
@@ -79,6 +83,8 @@ function getCategory(req, res) {
 
 /**
  * Gets all categories.
+ * @param {Object} req - no used
+ * @param {Object} res - res.body contains an array of all categories
  */
 function getCategories(req, res) {
     categoryService.getCategories()
@@ -93,6 +99,8 @@ function getCategories(req, res) {
 
 /**
  * Deletes a category.
+ * @param {Object} req - req.params.id contains id of the category to delete
+ * @param {Object} res - res.body contains no content
  */
 function deleteCategory(req, res) {
 

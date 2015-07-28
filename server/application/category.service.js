@@ -9,48 +9,41 @@ module.exports = {
 };
 
 var persistence = require('./persistence');
-var CategoryRepository = persistence.categoryRepository;
+var categoryRepository = persistence.categoryRepository;
 
 /**
  * Creates a new category and inserts it in to the database.
- * @param {Object} categoryData - Full category data, excluding the id. For example:
- * {
- *     name: 'Shopping'
- * }
- * @return {Promise} A promise that returns a full copy of the inserted category (including the id) on fulfillment.
+ * @param {Object} categoryData minus the id
+ * @return {Promise} A promise that returns the inserted category (including the id)
  */
 function createCategory(categoryData) {
-    return CategoryRepository.createCategory(categoryData);
+    return categoryRepository.createCategory(categoryData);
 }
 
 /**
  * Updates an existing category.
- * @param {Object} categoryData - Full category data, including the id. For example:
- * {
- *     id: 1,
- *     name: 'Shopping'
- * }
- * @return {Promise} A promise that returns a full copy of the inserted category (including the id) on fulfillment.
+ * @param {Object} categoryData including the id
+ * @return {Promise} A promise that returns the updated category (including the id)
  */
 function updateCategory(categoryData) {
-    return CategoryRepository.updateCategory(categoryData);
+    return categoryRepository.updateCategory(categoryData);
 }
 
 /**
  * Gets an existing category.
  * @param {integer} id
- * @return {Promise} A promise that returns the desired category on fulfillment.
+ * @return {Promise} A promise that returns the desired category.
  */
 function getCategory(id) {
-    return CategoryRepository.getCategory(id);
+    return categoryRepository.getCategory(id);
 }
 
 /**
  * Gets all categories.
- * @return {Promise} A promise that returns an array of all categories on fulfillment.
+ * @return {Promise} A promise that returns an array of all categories.
  */
 function getCategories() {
-    return CategoryRepository.getCategories();
+    return categoryRepository.getCategories();
 }
 
 /**
@@ -59,5 +52,5 @@ function getCategories() {
  * @return {Promise} A promise that gets fulfilled when the category is deleted.
  */
 function deleteCategory(id) {
-    return CategoryRepository.deleteCategory(id);
+    return categoryRepository.deleteCategory(id);
 }

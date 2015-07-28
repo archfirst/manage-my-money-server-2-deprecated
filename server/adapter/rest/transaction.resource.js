@@ -10,21 +10,21 @@ module.exports = {
 function addRoutes(api) {
     api.post('/transactions', createTransaction);
     api.put('/transactions/:id', updateTransaction);
-    api.get('/transactions', getTransactions);
     api.get('/transactions/:id', getTransaction);
+    api.get('/transactions', getTransactions);
     api.delete('/transactions/:id', deleteTransaction);
 }
-
 
 var infrastructure = require('../../infrastructure');
 var log = infrastructure.logger;
 var errors = infrastructure.errors;
 
-var application = require('../../application');
-var transactionService = application.transactionService;
+var transactionService = require('../../application').transactionService;
 
 /**
- * Creates a new transaction.
+ * Creates a new transaction and inserts it in to the database.
+ * @param {Object} req - req.body contains transactionData minus the id
+ * @param {Object} res - res.body contains the inserted transaction (including the id)
  */
 function createTransaction(req, res) {
 
@@ -47,6 +47,8 @@ function createTransaction(req, res) {
 
 /**
  * Updates an existing transaction.
+ * @param {Object} req - req.body contains transactionData including the id
+ * @param {Object} res - res.body contains the updated transaction (including the id)
  */
 function updateTransaction(req, res) {
 
@@ -69,6 +71,8 @@ function updateTransaction(req, res) {
 
 /**
  * Gets an existing transaction.
+ * @param {Object} req - req.params.id contains id of the transaction to get
+ * @param {Object} res - res.body contains the requested transaction
  */
 function getTransaction(req, res) {
 
@@ -90,6 +94,7 @@ function getTransaction(req, res) {
 /**
  * Gets all transactions.
  *
+ * @param {Object} req
  * optional query parameter: account
  *     returns all transactions for the specified account
  *
@@ -97,6 +102,8 @@ function getTransaction(req, res) {
  *     returns an array of transactions grouped by category
  *     requires two additional query parameters: startDate and endDate
  *     Example: /transactions?groupByCategory&startDate=2014-01-01&endDate=2014-12-31
+ *
+ * @param {Object} res - res.body contains an array of all matching transaction
  */
 function getTransactions(req, res) {
 
@@ -140,6 +147,8 @@ function getTransactions(req, res) {
 
 /**
  * Deletes a transaction.
+ * @param {Object} req - req.params.id contains id of the transaction to delete
+ * @param {Object} res - res.body contains no content
  */
 function deleteTransaction(req, res) {
 

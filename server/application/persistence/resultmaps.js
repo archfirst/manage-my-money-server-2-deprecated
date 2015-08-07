@@ -8,9 +8,7 @@ var resultMaps = [
         createNew: function() {
             return new domain.Account();
         },
-        properties: [
-            {name: 'name', column: 'name'}
-        ]
+        properties: ['name']
     },
 
     {
@@ -18,9 +16,7 @@ var resultMaps = [
         createNew: function() {
             return new domain.Category();
         },
-        properties: [
-            {name: 'name', column: 'name'}
-        ]
+        properties: ['name']
     },
 
     {
@@ -28,12 +24,7 @@ var resultMaps = [
         createNew: function() {
             return new domain.Transaction();
         },
-        properties: [
-            {name: 'txn_date', column: 'txn_date'},
-            {name: 'payee', column: 'payee'},
-            {name: 'memo', column: 'memo'},
-            {name: 'amount', column: 'amount'}
-        ],
+        properties: ['txn_date', 'payee', 'memo', 'amount'],
         associations: [
             {name: 'account', mapId: 'accountMap', columnPrefix: 'account_'},
             {name: 'category', mapId: 'categoryMap', columnPrefix: 'category_'}

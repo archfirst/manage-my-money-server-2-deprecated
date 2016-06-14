@@ -10,7 +10,7 @@ module.exports = {
 };
 
 var knex = require('./db').knex;
-var joinjs = require('join-js');
+var joinjs = require('join-js').default;
 var resultMaps = require('./resultmaps');
 var Transaction = require('../../domain').Transaction;
 

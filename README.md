@@ -1,6 +1,6 @@
-# Manage My Money Server
+# Manage My Money Server (Deprecated)
 
-**This version is replaced with a [new version](https://github.com/nareshbhatia/manage-my-money)**
+**This version is replaced with a [new version](https://github.com/nareshbhatia/manage-my-money).**
 
  *Manage My Money* is a simple application to record and analyze your income and expenses. It demonstrates best practices in developing applications using Node.js and REST. It uses [Knex.js](http://knexjs.org/) and [JoinJS](https://github.com/archfirst/joinjs) for object persistence. The application is based on the [Node REST Template](https://github.com/archfirst/node-rest-template) to provide the basic structure and build system. A full-fledged AngularJS front-end is available [here](https://github.com/archfirst/manage-my-money-client).
 
